@@ -35,14 +35,16 @@ int main(int argc, char *argv[]) {
   if(argc <= 1) {
     stream_input = stdin;
   } else {
-    while((opt = getopt(argc, argv, "f::")) != -1) {
+    while((opt = getopt(argc, argv, "f::h")) != -1) {
       switch(opt) {
         case 'f':
           stream_input = fopen(optarg, "r");
           break;
-        default:
-          fprintf(stderr, "Usage: \n\tcat FILE | rnbw\nrnbw -f FILE\n\n");
+        case 'h':
+          fprintf(stderr, "Usage: \n\tcat FILE | rnbw\n\trnbw -f FILE\n\n");
           exit(1);
+        default:
+          break;
       }
     }
   }
