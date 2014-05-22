@@ -35,9 +35,10 @@ int main(int argc, char *argv[]) {
   if(argc <= 1) {
     stream_input = stdin;
   } else {
-    while((opt = getopt(argc, argv, "f")) != -1) {
+    while((opt = getopt(argc, argv, "f::")) != -1) {
       switch(opt) {
         case 'f':
+          stream_input = fopen(optarg, "r");
           break;
         default:
           fprintf(stderr, "Usage: cat FILE | rnbw\n\n");
@@ -47,6 +48,10 @@ int main(int argc, char *argv[]) {
   }
 
   go_bananas(stream_input);
+
+  if(stream_input != stdin) {
+    fclose(stream_input);
+  }
 
   return 0;
 }
