@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
           stream_input = fopen(optarg, "r");
           break;
         default:
-          fprintf(stderr, "Usage: cat FILE | rnbw\n\n");
+          fprintf(stderr, "Usage: \n\tcat FILE | rnbw\nrnbw -f FILE\n\n");
           exit(1);
       }
     }
