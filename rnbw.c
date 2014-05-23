@@ -14,14 +14,18 @@ void go_bananas(FILE *fh) {
   if(fh == NULL) {
     return;
   }
+
   int c;
+  int start = 0;
   int pos = 0;
   while( EOF != (c = fgetc(fh)) ) {
     if(c == 0x0a) {
-      pos = 0;
+      start++;
+      pos = start;
       printf("%c", c);
       continue;
-    } 
+    }
+    // TODO: strip out any existing colours first
     printf(PAINT, rainbow[pos], c);
     if(pos <23){
       pos++;
