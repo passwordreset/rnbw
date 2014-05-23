@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <getopt.h>
 
+#define PAINT "\033[38;5;%d;m%c\033[0m"
+
 int rainbow[24] = {
 154, 184, 214, 208,  209, 203, 204, 198, 199, 164, 129, 93, 99, 63, 69, 33, 39,
 44, 49, 48, 84, 83, 119, 118
@@ -20,7 +22,7 @@ void go_bananas(FILE *fh) {
       printf("%c", c);
       continue;
     } 
-    printf("\033[38;5;%d;m%c\033[0m", rainbow[pos], c);
+    printf(PAINT, rainbow[pos], c);
     if(pos <23){
       pos++;
     } else {
