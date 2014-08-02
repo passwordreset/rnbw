@@ -28,21 +28,21 @@ func main() {
 		os.Exit(1)
 	}()
 
-    file := flag.String("f", "", "File to rnbw up")
+	file := flag.String("f", "", "File to rnbw up")
 	flag.Parse()
 
-    if *file != "" {
-        f, err := os.Open(*file)
-        if err != nil {
-            panic(fmt.Sprintf("Can't open file %s", *file))
-        }
-        reader := bufio.NewReader(f)
-        scanner := bufio.NewScanner(reader)
-        readIn(scanner)
-    } else {
-        scanner := bufio.NewScanner(os.Stdin)
-        readIn(scanner)
-    }
+	if *file != "" {
+		f, err := os.Open(*file)
+		if err != nil {
+			panic(fmt.Sprintf("Can't open file %s", *file))
+		}
+		reader := bufio.NewReader(f)
+		scanner := bufio.NewScanner(reader)
+		readIn(scanner)
+	} else {
+		scanner := bufio.NewScanner(os.Stdin)
+		readIn(scanner)
+	}
 
 }
 
@@ -61,18 +61,18 @@ func readIn(scanner *bufio.Scanner) {
 func makeItPretty(str string) {
 	chars := strings.Split(str, "")
 	pos := 0
-    escape := false
+	escape := false
 	for _, chr := range chars {
-        // Strip out other colours
-        if chr == "\033" {
-            escape = true
-            continue
-        } else if escape == true && chr == "m"{
-            escape = false
-            continue
-        } else if escape == true {
-            continue
-        }
+		// Strip out other colours
+		if chr == "\033" {
+			escape = true
+			continue
+		} else if escape == true && chr == "m" {
+			escape = false
+			continue
+		} else if escape == true {
+			continue
+		}
 
 		fmt.Printf(AnsiColourFormat, Rainbow[pos], chr)
 
