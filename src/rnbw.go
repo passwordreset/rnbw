@@ -28,15 +28,25 @@ func main() {
 		os.Exit(1)
 	}()
 
-	hjalp := flag.Bool("help", false, "I have no idea what I am doing")
+    file := flag.String("f", "", "File to rnbw up")
 	flag.Parse()
 
-	if *hjalp == true {
-		fmt.Println("Usage: ls -al | rnbw")
-		os.Exit(0)
-	}
+    if *file != "" {
+        f, err := os.Open(*file)
+        if err != nil {
+            panic(fmt.Sprintf("Can't open file %s", *file))
+        }
+        reader := bufio.NewReader(f)
+        scanner := bufio.NewScanner(reader)
+        readIn(scanner)
+    } else {
+        scanner := bufio.NewScanner(os.Stdin)
+        readIn(scanner)
+    }
 
-	scanner := bufio.NewScanner(os.Stdin)
+}
+
+func readIn(scanner *bufio.Scanner) {
 	for scanner.Scan() {
 		// TODO: Instead of going new-line splitting, go by bytes here, and then
 		// split by newlines later
@@ -45,6 +55,7 @@ func main() {
 	if err := scanner.Err(); err != nil {
 		os.Exit(0)
 	}
+
 }
 
 func makeItPretty(str string) {
