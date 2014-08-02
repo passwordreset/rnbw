@@ -25,7 +25,6 @@ func main() {
 
 	go func() {
 		receivedSignal := <-sigChannel
-		fmt.Printf("Signal %s received, packing up...", receivedSignal)
 		os.Exit(1)
 	}()
 
