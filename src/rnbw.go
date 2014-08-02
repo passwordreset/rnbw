@@ -24,7 +24,7 @@ func main() {
 		syscall.SIGTERM)
 
 	go func() {
-		receivedSignal := <-sigChannel
+		<-sigChannel
 		os.Exit(1)
 	}()
 
